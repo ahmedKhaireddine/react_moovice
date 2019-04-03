@@ -1,7 +1,31 @@
 .App {
   text-align: center;
 }
+a{
+  text-decoration: none;
+  color: black;
+  font-style:italic;
+  font-weight: bold;
+}
+nav{
+  width: 90%;
+  margin:10px auto;
+  background-color:white;
+  box-shadow: 5px 5px 5px #9ca1a7;
+}
+.list-link {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding-left:0;
+  text-align: center;
+}
 
+.list-link li{
+  list-style: none;
+  flex-basis: 33%;
+  padding: 10px;
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
