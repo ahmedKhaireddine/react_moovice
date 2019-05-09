@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Discover from './components/Discover';
 import Popular from './components/Popular';
 import MyList from './components/MyList';
+import Movie from './components/Movie';
 import './bootstrap.min.css';
 import './App.css';
 
@@ -27,6 +28,7 @@ class App extends React.Component{
           <Route path="/" exact component={Discover}/>
           <Route path="/popular/" component={Popular}/>
           <Route path="/my-list/" component={MyList}/>
+          <Route path="/movie/:id" component={Movie}/>
         </div>
       </Router>
     );

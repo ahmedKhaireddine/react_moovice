@@ -3,14 +3,36 @@
 }
 a{
   text-decoration: none;
-  color: black;
+  color: white;
   font-style:italic;
   font-weight: bold;
+}
+.icon-list{
+  padding-left:15px;
+  display: flex;
+  flex-direction: row;
+  
+}
+.icon-list li{
+  list-style: none;
+  margin:0 20px 0 40px; 
+  flex-basis: 50px;
+  background-color:#08215e;
+  border-radius:50%;
+  padding:9px 0;
+  border:2px solid white; 
+}
+.icon-list li:hover{
+  background-color: white;
+}
+.box-card{
+  box-shadow: 5px 5px 5px #9ca1a7;
+  border-radius: 5px;
 }
 nav{
   width: 90%;
   margin:10px auto;
-  background-color:white;
+  background-color:#081b23;
   box-shadow: 5px 5px 5px #9ca1a7;
 }
 .list-link {
@@ -25,6 +47,44 @@ nav{
   list-style: none;
   flex-basis: 33%;
   padding: 10px;
+}
+.box{
+  text-align: center;
+  margin:10px auto;
+  padding:15px 20px;
+
+}
+
+.box-Pictur img{
+  position: relative;
+  width:100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.box-Pictur i{
+  position: absolute;
+  top: 35px;
+  right: 45px; 
+}
+.fa-star{
+  opacity: 0.8;
+}
+/*--------Movie-----------*/
+.container-movie{
+  padding:40px;
+  background-color: #08215e;
+  color:white;
+  width: 90%;
+  margin:10px auto;
+  box-shadow: 5px 5px 5px #9ca1a7;
+}
+.movie-piture{
+  width: 90%;
+  margin:auto;
+}
+.movie-piture img{
+  height: 400px;
 }
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -54,4 +114,24 @@ nav{
   to {
     transform: rotate(360deg);
   }
+}
+@media (min-width: 768px) { 
+  /*--------Movie-----------*/
+  .movie-piture{
+    width: 0%;
+    margin:auto;
+  }
+  .movie-piture img{
+    height: 400px;
+  }
+  .movie-detail{
+    text-align: left;
+  }
+  .icon-list{
+    padding-left:0;
+    display: flex;
+    flex-direction: row;
+    
+  }
+
 }

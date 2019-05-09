@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './movie/Card';
-import './Popular.css';
+import Api from '../utils/Api';
+import LocalStorage from '../utils/LocalStorage';
 
 class Popular extends React.Component{
     constructor(props){
@@ -17,9 +18,6 @@ class Popular extends React.Component{
     }
     nextPage(){
         const numberPage = this.state.movies.length /2;
-        
-        console.log('this.state.currentPage : ',this.state.currentPage);
-        console.log('numberPage : ',numberPage);
         if(this.state.currentPage >= numberPage){
             this.setState({
                 currentPage: 1,
@@ -36,34 +34,19 @@ class Popular extends React.Component{
     }
 
     addFavoriteMovies(idMovie){
-        console.log('idMovie : ',idMovie);
-        let tabIdMovies =localStorage.getItem('idMovies');
-        console.log("tabIdMovies : ", tabIdMovies);
-        if(tabIdMovies === null){
-            let idMovies =[idMovie];
-            localStorage.setItem('idMovies',JSON.stringify(idMovies));
-        } else{
-            let idMovies = JSON.parse(tabIdMovies);
-            idMovies.push(idMovie);
-            localStorage.setItem('idMovies',JSON.stringify(idMovies));
-        }  
+        LocalStorage.save('idMovies', idMovie); 
     }
 
     componentDidMount(){
-        const url=`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=5f33eb7d5c9027aa3ab59e17105731f8`;
-        fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
-                movies:data.results
+        Api.getPopularMovies().then(movies =>{
+            this.setState({ 
+                movies
             });
         });
     } 
 
     renderList() {
-        
         const newTabMovies = this.state.movies.slice(this.state.firstMovie, this.state.lastMovie);
-    
         return newTabMovies.map((movie, index)=>{
             return(
                 <Card 
@@ -78,13 +61,25 @@ class Popular extends React.Component{
     }
     
     render(){
+        if (this.state.movies.length === 0) {
+            return (
+              <div className="text-center">
+                <h1>Popular</h1>
+                <p>Loading...</p>
+              </div>
+            );
+        }
         return(
-
             <div className="container">
                <div className="row">
+                    <div className="col-12 text-center">
+                        <h1 style={{
+                            padding: 25
+                        }}>Popular</h1>
+                    </div>
+                    
                    {this.renderList()} 
                </div>
-               {/* <p>{JSON.stringify(this.state.movies)}</p> */}
             </div>
         )
     }

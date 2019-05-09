@@ -1,5 +1,7 @@
 import React from 'react';
 import Card from './movie/Card';
+import Api from '../utils/Api';
+import LocalStorage from '../utils/LocalStorage';
 
 class MyList extends React.Component{
     constructor(props){
@@ -14,9 +16,7 @@ class MyList extends React.Component{
 
     componentDidMount(){
         Promise.all(this.state.movieIds.map((id) =>{
-            return fetch(`https://api.themoviedb.org/3/movie/`+ id +`?api_key=5f33eb7d5c9027aa3ab59e17105731f8`)
-            .then(res => res.json())
-            .then(data => data)
+            return Api.getMovie(id).then(movie => movie);
         })).then((movies)=> {
             console.log('movies: ', movies);
             this.setState({
@@ -26,23 +26,25 @@ class MyList extends React.Component{
     }
 
     getFromLocalStorage(){
-        const idMovies = JSON.parse(localStorage.getItem('idMovies'));
-        return idMovies;
+        return LocalStorage.get('idMovies');
     }
 
     removeMovie(idMovie){
         console.log('remove  idMovie : ', idMovie);
         const regex= new RegExp('(?:'+ idMovie +')','ig');
         let movies = [];
+        let movieIds = [];
         for(let movie of this.state.movies){
             console.log(movie.id);
             if(!regex.test(movie.id)){
                 movies.push(movie);
+                movieIds.push(movie.id);
             }
         }
-        console.log('newtable : ', movies);
+        localStorage.setItem('idMovies', JSON.stringify(movieIds));
         this.setState({
-            movies
+            movies,
+            movieIds
         });
     }
 
@@ -55,12 +57,23 @@ class MyList extends React.Component{
     }
 
     render(){
+        if (this.state.movies.length === 0) {
+            return (
+              <div className="text-center">
+                <h1>My list</h1>
+                <p>Loading...</p>
+              </div>
+            );
+        }
+
         return(
             <div> 
                 <div className="container">
                     <div className="row">
                         <div className="col-12 text-center">
-                            <p>My list</p>
+                            <h1 style={{
+                                padding: 25
+                            }}>My list</h1>
                         </div>
                         {this.renderList()}
                     </div>
