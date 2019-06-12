@@ -4,11 +4,11 @@
 
 *Desktop Version*
 
-![alt](https://github.com/ahmedKhaireddine/ahmedKhaireddinegif.github.io/blob/master/test1.gif?raw=true)
+![alt]()
 
 *Mobile Version*
 
-![alt](https://github.com/ahmedKhaireddine/ahmedKhaireddinegif.github.io/blob/master/test1.gif?raw=true)
+![alt]()
 
 ```
 Cette dernière nous permet :
